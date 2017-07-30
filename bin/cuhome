@@ -1,0 +1,4 @@
+#!/bin/bash
+
+CURRENT_USER=`who | awk '{print $1}'`
+su -c "echo ~" $CURRENT_USER

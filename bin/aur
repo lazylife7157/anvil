@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -n $AUR_GIT_PATH ]
+then
+  AUR_GIT_PATH=`cuhome`/git-aur
+fi
+
+log "Install $2"
+cudo "git clone $1 $AUR_GIT_PATH/$2"
+cudo "cd $AUR_GIT_PATH/$2 && makepkg -iscr --needed --noconfirm"

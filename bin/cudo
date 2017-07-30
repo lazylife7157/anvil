@@ -1,0 +1,4 @@
+#!/bin/bash
+
+CURRENT_USER=`who | awk '{print $1}'`
+sudo -u $CURRENT_USER -H bash -c "$1"
