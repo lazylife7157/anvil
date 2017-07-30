@@ -1,0 +1,4 @@
+# Locale
+1. Uncomment locale from /etc/locale.gen
+2. # locale-gen
+3. # echo 'LANG=en_US.UTF-8' >> /etc/locale.conf
