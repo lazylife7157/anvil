@@ -10,16 +10,29 @@ log "Install dev packages"
 pacman -Sy
 pacman -S --needed --noconfirm \
   gcc cmake make \
-  jdk8-openjdk scala sbt \
+  jdk8-openjdk \
+  scala sbt \
   rust cargo \
-  ghc \
+  ghc cabal-install happy alex haddock stack \
   python \
-  julia
+  julia \
+  atom
 
 if [ -z `echo $PATH | grep '.cargo/bin'` ]
 then
-  log "Add cargo binary directory to PATH environment variable"
+  log "Add Cargo binary directory to PATH environment variable"
   echo 'export PATH=$PATH:~/.cargo/bin' >> /etc/profile
+  cudo "source /etc/profile"
+fi
+
+log "Install Haskell utilities"
+cudo "stack install stylish-haskell"
+cudo "stack install ghc-mod"
+cudo "stack install hlint"
+if [ -z `echo $PATH | grep '.local/bin'` ]
+then
+  log "Add local binary directory (STACK_INSTALL_PATH) to PATH environment variable"
+  echo 'export PATH=$PATH:~/.local/bin' >> /etc/profile
   cudo "source /etc/profile"
 fi
 
@@ -31,4 +44,7 @@ then
   cudo "echo 'source ~/.bash-git-prompt/gitprompt.sh' >> ~/.bashrc"
 fi
 
+log "Install git-cola"
 aur https://aur.archlinux.org/git-cola.git git-cola
+
+cudo "../atom/setup.sh"
