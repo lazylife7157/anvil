@@ -18,7 +18,7 @@ pacman -S --needed --noconfirm \
   julia \
   atom
 
-if [ -z `echo $PATH | grep -o '.cargo/bin'` ]
+if [ -z `echo $PATH | grep -o '\.cargo/bin'` ]
 then
   log "Add Cargo binary directory to PATH environment variable"
   echo 'export PATH=$PATH:~/.cargo/bin' >> /etc/profile
@@ -26,7 +26,7 @@ then
 fi
 
 log "Install Haskell utilities"
-if [ -z `echo $PATH | grep -o '.local/bin'` ]
+if [ -z `echo $PATH | grep -o '\.local/bin'` ]
 then
   log "Add local binary directory (STACK_INSTALL_PATH) to PATH environment variable"
   echo 'export PATH=$PATH:~/.local/bin' >> /etc/profile
