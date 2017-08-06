@@ -18,13 +18,10 @@ pacman -Sy
 pacman -S --needed --noconfirm \
   net-tools \
   libglvnd \
-  patch fakeroot
+  patch fakeroot binutils pkg-config
 
-if [ -n `lspci -k | grep VGA | grep NVIDIA` ]
+if [ -n `lspci -k | grep VGA | grep -o NVIDIA` ]
 then
   log "Install NVIDIA driver"
   pacman -S --needed --noconfirm libglvnd nvidia
 fi
-
-aur https://aur.archlinux.org/ttf-nanum.git ttf-nanum
-aur https://aur.archlinux.org/ttf-d2coding.git ttf-d2coding

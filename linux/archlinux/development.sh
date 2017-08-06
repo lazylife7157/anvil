@@ -12,13 +12,13 @@ pacman -S --needed --noconfirm \
   gcc cmake make \
   jdk8-openjdk \
   scala sbt \
-  rust cargo \
-  ghc cabal-install happy alex haddock stack \
+  rust \
+  ghc cabal-install happy alex stack \
   python \
   julia \
   atom
 
-if [ -z `echo $PATH | grep '.cargo/bin'` ]
+if [ -z `echo $PATH | grep -o '.cargo/bin'` ]
 then
   log "Add Cargo binary directory to PATH environment variable"
   echo 'export PATH=$PATH:~/.cargo/bin' >> /etc/profile
@@ -26,15 +26,15 @@ then
 fi
 
 log "Install Haskell utilities"
-cudo "stack install stylish-haskell"
-cudo "stack install ghc-mod"
-cudo "stack install hlint"
-if [ -z `echo $PATH | grep '.local/bin'` ]
+if [ -z `echo $PATH | grep -o '.local/bin'` ]
 then
   log "Add local binary directory (STACK_INSTALL_PATH) to PATH environment variable"
   echo 'export PATH=$PATH:~/.local/bin' >> /etc/profile
   cudo "source /etc/profile"
 fi
+cudo "stack install stylish-haskell"
+cudo "stack install ghc-mod"
+cudo "stack install hlint"
 
 if [ ! -d "`cuhome`/.bash-git-prompt" ]
 then

@@ -6,14 +6,22 @@ then
   exit 1
 fi
 
+log "Install GUI packages"
+pacman -Sy
 pacman -S --needed --noconfirm \
   libx264 \
-  # Gnome
   gdm gnome-session gnome-shell gnome-shell-extensions \
   gnome-system-monitor gnome-control-center gnome-disk-utility \
-  gnome-backgrounds gnome-font-viewer gnome-screenshot\
-  nautilus networkmanager \
-  # Utilities
+  gnome-backgrounds gnome-font-viewer gnome-screenshot \
+  gnome-terminal \
+  nautilus \
   chromium
 
-aur https://aur.archlinux.org/gnome-terminal-transparency.git gnome-terminal-transparency
+if [ `systemctl is-enabled gdm` == 'disabled' ]
+then
+  log "Enable GDM"
+  systemctl enable gdm
+fi
+
+# log "Install gnome-terminal-transparancy"
+# aur https://aur.archlinux.org/gnome-terminal-transparency.git gnome-terminal-transparency
