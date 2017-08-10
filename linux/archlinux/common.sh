@@ -16,7 +16,8 @@ hwclock --systohc
 log "Install common packages"
 pacman -Sy
 pacman -S --needed --noconfirm \
-  net-tools wget \
+  net-tools wget openssh \
+  ntfs-3g \
   libglvnd \
   patch fakeroot binutils pkg-config \
   gcc cmake make python
