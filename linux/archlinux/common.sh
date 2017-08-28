@@ -20,7 +20,8 @@ pacman -S --needed --noconfirm \
   ntfs-3g \
   libglvnd \
   patch fakeroot binutils pkg-config \
-  gcc cmake make python
+  gcc cmake make python \
+  unzip
 
 if [ -n `lspci -k | grep VGA | grep -o NVIDIA` ]
 then
