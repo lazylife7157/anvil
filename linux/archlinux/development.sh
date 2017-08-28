@@ -44,5 +44,3 @@ fi
 
 log "Install git-cola"
 aur https://aur.archlinux.org/git-cola.git git-cola
-
-cudo "../atom/setup.sh"
