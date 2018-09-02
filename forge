@@ -82,7 +82,7 @@ copy_dotfiles() {
         cp -r dotfiles/Library ~
 
         for plist in `ls -A dotfiles/Library/Preferences`; do
-            defaults import $plist dotfiles/Library/$plist
+            defaults import $plist dotfiles/Library/Preferences/$plist
         done
     else
         mkdir -p ~/.config
