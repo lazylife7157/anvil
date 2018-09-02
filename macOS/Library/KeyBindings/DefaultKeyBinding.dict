@@ -1,9 +1,14 @@
-// ^		Control
-// $		Shift
+// Modifiers
+//
+// Control:	^
+// Shift:	$
+// Option:	~
+// Command:	@
 
 
 {
     "^a" = "selectAll:";
+    "^s" = "save:";
 
     "^z" = "undo:";
     "^x" = "cut:";
