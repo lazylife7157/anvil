@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+
+dmenu_path | fzf | xargs i3-msg exec
+
