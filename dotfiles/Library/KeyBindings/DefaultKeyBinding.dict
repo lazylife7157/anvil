@@ -9,12 +9,10 @@
 {
     "^a" = "selectAll:";
     "^s" = "save:";
-
     "^z" = "undo:";
     "^x" = "cut:";
     "^c" = "copy:";
     "^v" = "paste:";
-
     "\UF729" = "moveToBeginningOfLine:";                    // Home
     "$\UF729" = "moveToBeginningOfLineAndModifySelection:";
     "\UF72B" = "moveToEndOfLine:";                          // End
