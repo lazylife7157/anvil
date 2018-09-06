@@ -9,6 +9,7 @@ Plug 'majutsushi/tagbar'
 Plug 'vim-syntastic/syntastic'
 Plug 'rust-lang/rust.vim'
 Plug 'davidhalter/jedi-vim'
+Plug 'posva/vim-vue'
 
 call plug#end()
 
@@ -21,6 +22,10 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Rust
 let g:rustfmt_autosave = 1
+
+
+" Vue
+autocmd FileType vue syntax sync fromstart
 
 
 " Color scheme
@@ -48,4 +53,6 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab       " Insert space characters instead of tab characters
+
+set backspace=indent,eol,start  " Allow backspacing over everything
 
