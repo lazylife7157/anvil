@@ -5,6 +5,7 @@ Plug 'cocopon/iceberg.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'majutsushi/tagbar'
 Plug 'vim-syntastic/syntastic'
 Plug 'rust-lang/rust.vim'
@@ -55,4 +56,6 @@ set shiftwidth=4
 set expandtab       " Insert space characters instead of tab characters
 
 set backspace=indent,eol,start  " Allow backspacing over everything
+
+set clipboard=unnamedplus       " Alias unnamed register to the X Window clipboard
 
