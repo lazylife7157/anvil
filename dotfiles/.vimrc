@@ -7,9 +7,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'majutsushi/tagbar'
-Plug 'vim-syntastic/syntastic'
-Plug 'rust-lang/rust.vim'
-Plug 'davidhalter/jedi-vim'
+Plug 'w0rp/ale'
 Plug 'posva/vim-vue'
 
 call plug#end()
@@ -21,8 +19,23 @@ autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map <C-n> :NERDTreeToggle<CR>
 
 
-" Rust
-let g:rustfmt_autosave = 1
+" ALE
+let g:ale_completion_enabled = 1
+
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+\   'rust': ['rls'],
+\   'python': ['pyls'],
+\}
+let g:ale_rust_rls_executable = 'rls'
+let g:ale_rust_rls_toolchain = 'nightly'
+
+let g:ale_fixers = {
+\   'rust': ['rustfmt'],
+\   'python': ['black'],
+\}
+let g:ale_fix_on_save = 1
+
 
 
 " Vue
