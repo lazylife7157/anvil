@@ -53,21 +53,20 @@ system_config() {
 
 install_dev_tools() {
     if [ -x "$(command -v pacman)" ]; then
-        sudo pacman -S --needed zsh vim rustup
+        sudo pacman -S --needed zsh neovim rustup python3 yarn
     elif [ -x "$(command -v brew)" ]; then
-        brew install zsh vim rustup-init
+        brew install zsh neovim rustup-init python3 yarn
     fi
 
-    if [ -d $HOME/.zplug ]; then
-        echo "[Skip] $HOME/.zplug is already exists."
+    rustup toolchain install nightly
+    rustup component add rls --toolchain nightly
+    pip3 install python-language-server
+    yarn add global vue-language-client
+
+    if [ -d ~/.zplug ]; then
+        echo "[Skip] ~/.zplug is already exists."
     else
         curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-    fi
-
-    if [ -f $HOME/.vim/autoload/plug.vim ]; then
-        echo "[Skip] $HOME/.vim/autoload/plug.vim is already exists."
-    else
-        curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
 }
 
@@ -93,6 +92,18 @@ copy_dotfiles() {
 }
 
 
+install_vim_plugins() {
+    if [ -f ~/.config/nvim/autoload/plug.vim ]; then
+        echo "[Skip] ~/.config/nvim/autoload/plug.vim is already exists."
+    else
+        curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+
+    pip3 install --user pynvim
+    nvim -c PlugInstall -c UpdateRemotePlugins -c qa!
+}
+
+
 if [ $sysconf -eq 1 ]; then
     system_config
 fi
@@ -106,6 +117,6 @@ if [ $dotfiles -eq 1 ]; then
 fi
 
 if [ $vimplugins -eq 1 ]; then
-    vim -c PlugInstall -c qa!
+    install_vim_plugins
 fi
 

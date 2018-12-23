@@ -34,11 +34,11 @@ add_path()
     fi
 }
 
-add_path $HOME/.cargo/bin
-add_path $HOME/.anvil/bin
+add_path ~/.cargo/bin
+add_path ~/.anvil/bin
+[ -x "$(command -v yarn)" ] && add_path("$(yarn global bin)")
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [ -x "$(command -v pyenv)" ] && eval "$(pyenv init -)"
-[ -x "$(command -v vim)" ] && alias vi=vim
-
+[ -x "$(command -v nvim)" ] && alias vi=nvim
