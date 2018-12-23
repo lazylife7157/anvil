@@ -69,6 +69,7 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['pyls'],
     \ 'vue': ['vls'],
     \ }
+let g:LanguageClient_changeThrottle = 0.4
 
 nnoremap <leader>lc :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
