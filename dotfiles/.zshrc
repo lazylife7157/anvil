@@ -36,7 +36,7 @@ add_path()
 
 add_path ~/.cargo/bin
 add_path ~/.anvil/bin
-[ -x "$(command -v yarn)" ] && add_path("$(yarn global bin)")
+[ -x "$(command -v yarn)" ] && add_path "$(yarn global bin)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
