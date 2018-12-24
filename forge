@@ -61,7 +61,7 @@ install_dev_tools() {
     rustup toolchain install nightly
     rustup component add rls --toolchain nightly
     pip3 install python-language-server
-    yarn add global vue-language-server
+    yarn global add vue-language-server
 
     if [ -d ~/.zplug ]; then
         echo "[Skip] ~/.zplug is already exists."
