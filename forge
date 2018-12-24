@@ -30,6 +30,7 @@ for opt in "$@"; do
             sysconf=1
             devtools=1
             dotfiles=1
+            vimplugins=1
             ;;
         --sysconf)      sysconf=1   ;;
         --devtools)     devtools=1  ;;
@@ -43,25 +44,42 @@ for opt in "$@"; do
 done
 
 
+if [ `whoami` != "root" ]; then
+    sudo="sudo"
+fi
+
+
 system_config() {
     if [ `uname` == "Linux" ]; then
         # Enable network time synchronization
-        sudo timedatectl set-ntp true
+        $sudo timedatectl set-ntp true
     fi
 }
 
 
 install_dev_tools() {
     if [ -x "$(command -v pacman)" ]; then
-        sudo pacman -S --needed zsh neovim rustup python3 yarn
+        $sudo pacman -S --needed zsh neovim rustup python3 yarn
+    elif [ -x "$(command -v apt-get)" ]; then
+        $sudo apt-add-repository -y ppa:neovim-ppa/stable && \
+        $sudo apt-get update && \
+        $sudo apt-get install -y neovim
     elif [ -x "$(command -v brew)" ]; then
         brew install zsh neovim rustup-init python3 yarn
     fi
 
-    rustup toolchain install nightly
-    rustup component add rls --toolchain nightly
-    pip3 install python-language-server
-    yarn global add vue-language-server
+    if [ -x "$(command -v rustup)" ]; then
+        rustup toolchain install nightly
+        rustup component add rls --toolchain nightly
+    fi
+
+    if [ -x "$(command -v pip3)" ]; then
+        pip3 install python-language-server
+    fi
+
+    if [ -x "$(command -v yarn)" ]; then
+        yarn global add vue-language-server
+    fi
 
     if [ -d ~/.zplug ]; then
         echo "[Skip] ~/.zplug is already exists."
