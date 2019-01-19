@@ -3,7 +3,7 @@
 # These are the defaults from the "Default" theme 
 # You just need to override what you want to have changed
 override_git_prompt_colors() {
-  GIT_PROMPT_THEME_NAME="Anvil"
+  GIT_PROMPT_THEME_NAME="Custom"
 
   # Time12a="\$(date +%H:%M)"
   # PathShort="\w";
@@ -63,4 +63,4 @@ override_git_prompt_colors() {
   # GIT_PROMPT_MASTER_BRANCHES="master"
 }
 
-reload_git_prompt_colors "Anvil"
+reload_git_prompt_colors "Custom"

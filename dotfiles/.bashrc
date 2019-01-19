@@ -39,9 +39,10 @@ alias vi='vim'
 
 ## Right aligned bash-git-prompt
 if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
-	GIT_PROMPT_ONLY_IN_REPO=1
-	GIT_PROMPT_THEME=Anvil
-	source ~/.bash-git-prompt/gitprompt.sh
+    GIT_PROMPT_ONLY_IN_REPO=1
+    GIT_PROMPT_THEME=Custom
+    GIT_PROMPT_THEME_FILE=~/.git-prompt-colors.sh
+    source ~/.bash-git-prompt/gitprompt.sh
 
     __prompt_command() {
         local repo=$(git rev-parse --show-toplevel 2> /dev/null)
