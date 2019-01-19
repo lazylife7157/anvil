@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+PLATFORM=`uname -s`
 
 sysconf=0
 devtools=0
@@ -44,13 +50,11 @@ for opt in "$@"; do
 done
 
 
-if [ `whoami` != "root" ]; then
-    sudo="sudo"
-fi
+[ `whoami` != "root" ] && sudo="sudo"
 
 
 system_config() {
-    if [ `uname` == "Linux" ]; then
+    if [ "$PLATFORM" == "Linux" ]; then
         # Enable network time synchronization
         $sudo timedatectl set-ntp true
     fi
@@ -122,19 +126,7 @@ install_vim_plugins() {
 }
 
 
-if [ $sysconf -eq 1 ]; then
-    system_config
-fi
-
-if [ $devtools -eq 1 ]; then
-    install_dev_tools
-fi
-
-if [ $dotfiles -eq 1 ]; then
-    copy_dotfiles
-fi
-
-if [ $vimplugins -eq 1 ]; then
-    install_vim_plugins
-fi
-
+[ "$sysconf" -eq 1 ]    && system_config
+[ "$devtools" -eq 1 ]   && install_dev_tools
+[ "$dotfiles" -eq 1 ]   && copy_dotfiles
+[ "$vimplugins" -eq 1 ] && install_vim_plugins
