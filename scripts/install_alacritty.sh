@@ -19,9 +19,9 @@ elif [ "$PLATFORM" == "Darwin" ]; then
     rm alacritty.man
 
     # Bash Completion
-    mkdir -p ~/.bash_completion
+    mkdir -p ~/.bash_completion.d
     wget https://raw.githubusercontent.com/jwilm/alacritty/master/alacritty-completions.bash
-    mv alacritty-completions.bash ~/.bash_completion/
+    mv alacritty-completions.bash ~/.bash_completion.d/
 
     # Terminfo
     wget https://raw.githubusercontent.com/jwilm/alacritty/master/alacritty.info

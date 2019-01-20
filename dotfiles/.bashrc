@@ -67,8 +67,8 @@ fi
 # Completions
 # ----------------------------------------------------------------------------
 
-for file in `ls ~/.bash_completion/`; do
-    src "$HOME/.bash_completion/$file"
+for file in `ls ~/.bash_completion.d/`; do
+    src "$HOME/.bash_completion.d/$file"
 done
 
 
