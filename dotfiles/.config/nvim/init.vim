@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'cocopon/iceberg.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'posva/vim-vue'
@@ -38,6 +39,14 @@ set expandtab
 set smarttab
 set backspace=indent,eol,start
 set clipboard=unnamedplus       " Alias unnamed register to the X Window clipboard
+
+" }}}
+" Mappings {{{
+
+nnoremap <M-I> <C-w> +
+nnoremap <M-J> <C-w> <
+nnoremap <M-K> <C-w> -
+nnoremap <M-L> <C-w> >
 
 " }}}
 " Color scheme {{{
