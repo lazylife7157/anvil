@@ -67,9 +67,11 @@ fi
 # Completions
 # ----------------------------------------------------------------------------
 
-for file in `ls ~/.bash_completion.d/`; do
-    src "$HOME/.bash_completion.d/$file"
-done
+if [ -d "$HOME/.bash_completion.d" ]; then
+    for file in `ls ~/.bash_completion.d`; do
+        src "$HOME/.bash_completion.d/$file"
+    done
+fi
 
 
 src "$HOME/.fzf.bash"
