@@ -45,13 +45,19 @@ let maplocalleader = ' '
 
 set number
 set scrolloff=8
+
 set autoindent
 set smartindent
+set expandtab
+set smarttab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab
-set smarttab
+autocmd FileType html       setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType json       setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType vue        setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
 set backspace=indent,eol,start
 set clipboard=unnamedplus       " Alias unnamed register to the X Window clipboard
 
