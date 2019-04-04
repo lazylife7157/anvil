@@ -11,14 +11,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'posva/vim-vue'
-
-if has('nvim')
-    Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-    \ }
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-endif
+Plug 'neoclide/coc.nvim', { 'tag': '*', 'do': { -> coc#util#install()} }
 
 call plug#end()
 
