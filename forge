@@ -122,7 +122,7 @@ install_vim_plugins() {
     fi
 
     pip3 install --user pynvim
-    nvim -c PlugInstall -c UpdateRemotePlugins -c qa!
+    nvim -c PlugClean -c PlugInstall -c UpdateRemotePlugins -c qa!
 }
 
 
