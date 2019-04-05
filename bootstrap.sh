@@ -21,7 +21,7 @@ initialize_arch() {
         rm -rf ${YAY_DIR}
     fi
 
-    pacman -Sy --needed --noconfirm exa fd yarn neovim
+    pacman -Sy --needed --noconfirm exa fd yarn neovim tig
 
     pacman -Sy --needed --noconfirm libglvnd xf86-video-nouveau mesa
     pacman -Sy --needed --noconfirm sway swayidle swaylock
@@ -33,11 +33,11 @@ initialize_arch() {
 initialize_debian() {
     apt-add-repository -y ppa:neovim-ppa/stable
     apt-get update
-    apt-get install -y build-essential git exa fd yarn neovim
+    apt-get install -y build-essential git exa fd yarn neovim tig
 }
 
 initialize_osx() {
-    brew install git exa fd yarn neovim
+    brew install git exa fd yarn neovim tig
     brew cask install alacritty
 }
 
@@ -61,6 +61,8 @@ initialize() {
     elif [ "$PLATFORM" == "Darwin" ]; then
         initialize_osx
     fi
+
+    git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 }
 
 install_anvil() {
