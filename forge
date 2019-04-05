@@ -3,45 +3,40 @@
 set -o errexit
 set -o pipefail
 set -o nounset
-# set -o xtrace
+set -o xtrace
+
 
 PLATFORM=`uname -s`
 
-sysconf=0
-devtools=0
-dotfiles=0
-vimplugins=0
+DOTFILES=0
+VIMPLUGINS=0
 
 help() {
     cat << EOF
-usage: $0 [OPTIONS]
+usage: ${0} [OPTIONS]
 
     --help          Show this message
     --all           Do every tasks
 
-    --sysconf       System configuration
-    --devtools      Install development tools
-    --dotfiles      Copy dotfiles to home directory
+    --dotfiles      Copy dotfiles into home directory
     --vimplugins    Install vim plugins via vim-plug
 EOF
 }
 
-for opt in "$@"; do
-    case $opt in
+for opt in "${@}"; do
+    case ${opt} in
         --help)
             help
             exit 0
             ;;
         --all)
-            sysconf=1
-            devtools=1
-            dotfiles=1
-            vimplugins=1
+            DOTFILES=1
+            VIMPLUGINS=1
             ;;
-        --sysconf)      sysconf=1   ;;
-        --devtools)     devtools=1  ;;
-        --dotfiles)     dotfiles=1  ;;
-        --vimplugins)   vimplugins=1;;
+        -d)             DOTFILES=1  ;;
+        --dotfiles)     DOTFILES=1  ;;
+        -v)             VIMPLUGINS=1;;
+        --vimplugins)   VIMPLUGINS=1;;
         *)
             help
             exit 1
@@ -50,83 +45,33 @@ for opt in "$@"; do
 done
 
 
-[ `whoami` != "root" ] && sudo="sudo"
-
-
-system_config() {
-    if [ "$PLATFORM" == "Linux" ]; then
-        # Enable network time synchronization
-        $sudo timedatectl set-ntp true
-    fi
-}
-
-
-install_dev_tools() {
-    if [ -x "$(command -v pacman)" ]; then
-        $sudo pacman -S --needed zsh neovim rustup python3 yarn
-    elif [ -x "$(command -v apt-get)" ]; then
-        $sudo apt-add-repository -y ppa:neovim-ppa/stable && \
-        $sudo apt-get update && \
-        $sudo apt-get install -y neovim
-    elif [ -x "$(command -v brew)" ]; then
-        brew install zsh neovim rustup-init python3 yarn
-    fi
-
-    if [ -x "$(command -v rustup)" ]; then
-        rustup toolchain install nightly
-        rustup component add rls --toolchain nightly
-    fi
-
-    if [ -x "$(command -v pip3)" ]; then
-        pip3 install python-language-server
-    fi
-
-    if [ -x "$(command -v yarn)" ]; then
-        yarn global add vue-language-server
-    fi
-
-    if [ -d ~/.zplug ]; then
-        echo "[Skip] ~/.zplug is already exists."
-    else
-        curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-    fi
-}
-
-
 copy_dotfiles() {
     for dotfile in `ls -A dotfiles | grep -v -e .config -e Library`; do
-        cp dotfiles/$dotfile ~
+        cp dotfiles/${dotfile} ${HOME}
     done
 
     if [ `uname` == "Darwin" ]; then
-        cp -r dotfiles/.config ~
-        cp -r dotfiles/Library ~
+        cp -r dotfiles/.config ${HOME}
+        cp -r dotfiles/Library ${HOME}
 
         for plist in `ls -A dotfiles/Library/Preferences`; do
-            defaults import $plist dotfiles/Library/Preferences/$plist
+            defaults import ${plist} dotfiles/Library/Preferences/${plist}
         done
     else
         mkdir -p ~/.config
         for dir in `ls -A dotfiles/.config | grep -v karabiner`; do
-            cp -r dotfiles/.config/$dir ~/.config
+            cp -r dotfiles/.config/${dir} ${HOME}/.config
         done
     fi
 }
 
-
 install_vim_plugins() {
-    if [ -f ~/.config/nvim/autoload/plug.vim ]; then
-        echo "[Skip] ~/.config/nvim/autoload/plug.vim is already exists."
-    else
-        curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    if [ ! -f "${HOME}/.config/nvim/autoload/plug.vim" ]; then
+        curl -fLo ${HOME}/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
-
-    pip3 install --user pynvim
     nvim -c PlugClean -c PlugInstall -c UpdateRemotePlugins -c qa!
 }
 
 
-[ "$sysconf" -eq 1 ]    && system_config
-[ "$devtools" -eq 1 ]   && install_dev_tools
-[ "$dotfiles" -eq 1 ]   && copy_dotfiles
-[ "$vimplugins" -eq 1 ] && install_vim_plugins
+[ "${DOTFILES}" -eq 1 ] && copy_dotfiles
+[ "${VIMPLUGINS}" -eq 1 ] && install_vim_plugins

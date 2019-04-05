@@ -19,19 +19,20 @@ export LC_ALL=en_US.UTF-8
 
 path "$HOME/.anvil/bin"
 path "$HOME/.cargo/bin"
+path "$HOME/.pyenv/bin"
 [ -x "$(command -v yarn)" ] && path `yarn global bin 2>/dev/null`
 
 
 # Aliases
 # ----------------------------------------------------------------------------
 
-[ -x "$(command -v nvim)" ] && alias vim='nvim'
+[ -x "$(command -v vim)" ] && alias vi='vim'
+[ -x "$(command -v nvim)" ] && alias vi='nvim'
 [ -x "$(command -v exa)" ] && alias ls='exa'
 [ -x "$(command -v fd)" ] && alias find='fd'
 
 alias l='ls -alF'
 alias ll='ls -l'
-alias vi='vim'
 
 
 # Prompt
@@ -74,4 +75,19 @@ if [ -d "$HOME/.bash_completion.d" ]; then
 fi
 
 
+# Pyenv
+# ----------------------------------------------------------------------------
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+
+# NVM
+# ----------------------------------------------------------------------------
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# FZF
+# ----------------------------------------------------------------------------
 src "$HOME/.fzf.bash"

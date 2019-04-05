@@ -24,7 +24,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'posva/vim-vue'
 
 " Coc (Language Server Client) && Coc extensions
-Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install()} }
+Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-rls', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-python', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-vetur', { 'do': 'yarn install --frozen-lockfile' }
