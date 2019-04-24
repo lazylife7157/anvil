@@ -8,6 +8,7 @@ set -o xtrace
 
 PYTHON_VERSION=3.7.3
 PLATFORM=`uname -s`
+[`whoami` != "root"] && sudo="sudo" || sudo=""
 
 
 initialize_arch() {
@@ -31,11 +32,12 @@ initialize_arch() {
 }
 
 initialize_debian() {
-    apt-add-repository -y ppa:neovim-ppa/stable
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    apt-get update
-    apt-get install -y build-essential git tmux yarn neovim tig
+    ${sudo} apt-add-repository -y ppa:neovim-ppa/stable
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | ${sudo} apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | ${sudo} tee /etc/apt/sources.list.d/yarn.list
+    ${sudo} apt-get update
+    ${sudo} apt-get install -y build-essential git tmux neovim tig
+    ${sudo} apt-get install -y --no-install-recommends yarn
     cargo install exa fd
 }
 
