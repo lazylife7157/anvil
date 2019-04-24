@@ -32,8 +32,11 @@ initialize_arch() {
 
 initialize_debian() {
     apt-add-repository -y ppa:neovim-ppa/stable
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     apt-get update
-    apt-get install -y build-essential git tmux exa fd yarn neovim tig
+    apt-get install -y build-essential git tmux yarn neovim tig
+    cargo install exa fd
 }
 
 initialize_osx() {
@@ -45,11 +48,18 @@ initialize() {
     [ -x "$(command -v pacman)" ] && pacman -Sy --needed --noconfirm base-devel
 
     curl https://sh.rustup.rs -sSf | sh
-    curl https://pyenv.run | bash
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
+    curl https://pyenv.run | bash
+    export PATH="${PATH}:${HOME}/.pyenv/bin"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
     pyenv install ${PYTHON_VERSION}
     pyenv global ${PYTHON_VERSION}
+
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
     nvm install node
 
     if [ "$PLATFORM" == "Linux" ]; then
