@@ -2,11 +2,11 @@
 # ----------------------------------------------------------------------------
 
 path() {
-    [ ! $PATH == *$1* ] && export PATH="$PATH:$1"
+    [ ! "${PATH}" == "*${1}*" ] && export PATH="${PATH}:${1}"
 }
 
 src() {
-    [ -f $1 ] && source $1
+    [ -f "${1}" ] && source ${1}
 }
 
 
@@ -17,9 +17,9 @@ export EDITOR=vi
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-path "$HOME/.anvil/bin"
-path "$HOME/.cargo/bin"
-path "$HOME/.pyenv/bin"
+path "${HOME}/.anvil/bin"
+path "${HOME}/.cargo/bin"
+path "${HOME}/.pyenv/bin"
 [ -x "$(command -v yarn)" ] && path `yarn global bin 2>/dev/null`
 
 
@@ -39,7 +39,7 @@ alias ll='ls -l'
 # ----------------------------------------------------------------------------
 
 ## Right aligned bash-git-prompt
-if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+if [ -f "${HOME}/.bash-git-prompt/gitprompt.sh" ]; then
     GIT_PROMPT_ONLY_IN_REPO=1
     GIT_PROMPT_THEME=Custom
     GIT_PROMPT_THEME_FILE=~/.git-prompt-colors.sh
@@ -68,9 +68,9 @@ fi
 # Completions
 # ----------------------------------------------------------------------------
 
-if [ -d "$HOME/.bash_completion.d" ]; then
+if [ -d "${HOME}/.bash_completion.d" ]; then
     for file in `ls ~/.bash_completion.d`; do
-        src "$HOME/.bash_completion.d/$file"
+        src "${HOME}/.bash_completion.d/${file}"
     done
 fi
 
@@ -83,11 +83,11 @@ eval "$(pyenv virtualenv-init -)"
 
 # NVM
 # ----------------------------------------------------------------------------
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="${HOME}/.nvm"
+[ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"  # This loads nvm
+[ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion"  # This loads nvm bash_completion
 
 
 # FZF
 # ----------------------------------------------------------------------------
-src "$HOME/.fzf.bash"
+src "${HOME}/.fzf.bash"
