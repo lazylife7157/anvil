@@ -77,8 +77,10 @@ fi
 
 # Pyenv
 # ----------------------------------------------------------------------------
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [ -x "$(command -v pyenv)" ]; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 
 # NVM

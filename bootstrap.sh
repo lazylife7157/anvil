@@ -90,6 +90,7 @@ initialize_debian() {
 
     ${sudo} apt purge -y tmux
     ${sudo} apt update
+    ${sudo} apt install -y gpg-agent
     ${sudo} apt install -y apt-transport-https
 
     ${sudo} apt-add-repository -y ppa:neovim-ppa/stable
@@ -98,10 +99,7 @@ initialize_debian() {
 
     ${sudo} apt update
     ${sudo} apt install -y \
-        make build-essential libssl-dev zlib1g-dev libbz2-dev \
-        libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-        xz-utils tk-dev libffi-dev liblzma-dev python-dev git cmake \
-        tar libevent-dev libncurses-dev \
+        cmake tar libevent-dev libncurses-dev \
         neovim tig
     ${sudo} apt install -y --no-install-recommends yarn
     ${sudo} apt autoremove -y
@@ -109,7 +107,6 @@ initialize_debian() {
     install_tmux ${TMUX_VERSION}
 
     install_rust
-    install_python ${PYTHON_VERSION}
     install_node
 
     cargo install exa fd-find
