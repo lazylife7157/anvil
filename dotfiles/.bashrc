@@ -1,6 +1,6 @@
-for file in "${HOME}/.bashrc.d/*.bashrc";
+for file in `ls ${HOME}/.bashrc.d`;
 do
-    source “${file}”
+    source "${HOME}/.bashrc.d/${file}"
 done
 
 

@@ -46,9 +46,10 @@ done
 
 
 copy_dotfiles() {
-    for dotfile in `ls -A dotfiles | grep -v -e .config -e Library`; do
+    for dotfile in `ls -A dotfiles | grep -v -e .bashrc.d -e .config -e Library`; do
         cp dotfiles/${dotfile} ${HOME}
     done
+    cp -r dotfiles/.bashrc.d ${HOME}
 
     if [ `uname` == "Darwin" ]; then
         cp -r dotfiles/.config ${HOME}
