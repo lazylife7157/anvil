@@ -1,3 +1,9 @@
+for file in "${HOME}/.bashrc.d/*.bashrc";
+do
+    source “${file}”
+done
+
+
 # Functions
 # ----------------------------------------------------------------------------
 
@@ -72,14 +78,6 @@ if [ -d "${HOME}/.bash_completion.d" ]; then
     for file in `ls ~/.bash_completion.d`; do
         src "${HOME}/.bash_completion.d/${file}"
     done
-fi
-
-
-# Pyenv
-# ----------------------------------------------------------------------------
-if [ -x "$(command -v pyenv)" ]; then
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
 fi
 
 
