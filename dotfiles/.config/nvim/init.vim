@@ -35,6 +35,9 @@ Plug 'neoclide/coc-json', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-yaml', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-emmet', { 'do': 'yarn install --frozen-lockfile' }
 
+" Markdown preview
+Plug 'shime/vim-livedown'
+
 call plug#end()
 
 " }}}
@@ -217,5 +220,22 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" }}}
+" Livedown {{{
+
+nmap gm :LivedownToggle<CR>
+
+" should markdown preview get shown automatically upon opening markdown buffer
+let g:livedown_autorun = 0
+
+" should the browser window pop-up upon previewing
+let g:livedown_open = 1
+
+" the port on which Livedown server will run
+let g:livedown_port = 1337
+
+" the browser to use, can also be firefox, chrome or other, depending on your executable
+let g:livedown_browser = "firefox"
 
 " }}}
