@@ -14,6 +14,7 @@ set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred terminal emulator
 set $term_tmux alacritty --command tmux new -A -s local
 set $term alacritty
@@ -241,3 +242,30 @@ output DP-1 scale 1.25
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Ark-Dark'
 }
+
+# Gaps
+gaps inner 0
+gaps outer 0
+
+# Border
+default_border pixel 4
+default_floating_border pixel 4
+
+# Set colors
+set $black      #1e2127
+set $red        #e06c75
+set $green      #98c379
+set $yellow     #d19a66
+set $blue       #61afef
+set $magenta    #c678dd
+set $cyan       #56b6c2
+set $white      #abb2bf
+
+set $bg $black
+set $fg $white
+set $br $blue
+
+# class                 border  background  text    indicator   child_border
+client.focused          $br     $br         $fg     $bg         $br
+client.focused_inactive $bg     $bg         $fg     $bg         $bg
+client.unfocused        $bg     $bg         $fg     $bg         $bg
