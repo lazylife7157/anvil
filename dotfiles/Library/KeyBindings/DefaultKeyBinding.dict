@@ -1,0 +1,14 @@
+// Modifiers
+//
+// Control:     ^
+// Shift:       $
+// Option:      ~
+// Command:     @
+
+
+{
+    "\UF729" = "moveToBeginningOfLine:";                    // Home
+    "$\UF729" = "moveToBeginningOfLineAndModifySelection:";
+    "\UF72B" = "moveToEndOfLine:";                          // End
+    "$\UF72B" = "moveToEndOfLineAndModifySelection:";
+}
