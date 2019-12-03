@@ -34,24 +34,31 @@ window:
 
   # Window decorations
   #
-  # Available values:
-  # - `full`: Window with title bar and title bar buttons
-  # - `none`: Window without title bar, rounded corners, or drop shadow
-  # - `transparent`: Window with title bar with transparent background and title
-  #   bar buttons
-  # - `buttonless`: Window with title bar with transparent background and no
-  #   title bar buttons
-  # Window decorations
-  #
   # Values for `decorations`:
   #     - full: Borders and title bar
   #     - none: Neither borders nor title bar
-  #     - buttonless: Title bar, transparent background and title bar buttons
-  #     - transparent: Title bar, transparent background, but no title bar buttons
+  #
+  # Values for `decorations` (macOS only):
+  #     - transparent: Title bar, transparent background and title bar buttons
+  #     - buttonless: Title bar, transparent background, but no title bar buttons
   decorations: full
 
-  # When true, alacritty starts maximized.
-  start_maximized: false
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: Windowed
+
+  # GTK theme variant (Linux only)
+  #
+  # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
+  # Set this to `None` to use the default theme variant.
+  #gtk_theme_variant: None
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -61,15 +68,6 @@ scrolling:
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
   multiplier: 3
-
-  # Faux Scrolling
-  #
-  # The `faux_multiplier` setting controls the number of lines the terminal
-  # should scroll when the alternate screen buffer is active. This is used
-  # to allow mouse scrolling for applications like `man`.
-  #
-  # Specifying `0` will disable faux scrolling.
-  faux_multiplier: 3
 
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: false
@@ -134,12 +132,6 @@ font:
   # This is a global setting and will require a log out or restart to take
   # effect.
   use_thin_strokes: true
-
-# Display the time it takes to redraw each frame.
-render_timer: false
-
-# Keep the log file after quitting Alacritty.
-persistent_logging: false
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -286,6 +278,30 @@ visual_bell:
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
 background_opacity: 0.86
+
+debug:
+  # Display the time it takes to redraw each frame.
+  render_timer: false
+
+  # Keep the log file after quitting Alacritty.
+  persistent_logging: false
+
+  # Log level
+  #
+  # Values for `log_level`:
+  #   - None
+  #   - Error
+  #   - Warn
+  #   - Info
+  #   - Debug
+  #   - Trace
+  #log_level: Warn
+
+  # Print all received window events.
+  #print_events: false
+
+  # Record all characters and escape sequences as test data.
+  #ref_test: false
 
 # Mouse bindings
 #
