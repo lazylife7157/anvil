@@ -22,7 +22,7 @@ function git_prompt() {
 
     local GIT_BRANCH="${git_status_fields[1]}"
     local GIT_REMOTE="${git_status_fields[2]}"
-    if [[ "." == "${GIT_REMOTE}" ]]; then
+    if [[ "." == "${GIT_REMOTE}" ]] || [[ "_NO_REMOTE_TRACKING_" == "${GIT_REMOTE}" ]]; then
         unset GIT_REMOTE
     fi
     local GIT_REMOTE_USERNAME_REPO="${git_status_fields[3]}"
