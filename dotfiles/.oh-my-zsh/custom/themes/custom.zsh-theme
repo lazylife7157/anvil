@@ -1,4 +1,4 @@
-local ret_status="%(?:%{$fg_bold[green]%}λ :%{$fg_bold[red]%}λ %s)"
+local ret_status="%(?:%{$fg_bold[green]%}λ:%{$fg_bold[red]%}λ%s)"
 
 function get_pwd(){
   git_root=$PWD
@@ -16,6 +16,7 @@ function get_pwd(){
 }
 
 function git_prompt() {
+    local EMPTY_PROMPT=""
     local __GIT_STATUS_CMD="${HOME}/.bash-git-prompt/gitstatus.sh"
     local -a git_status_fields
     while IFS=$'\n' read -r line; do git_status_fields+=("${line}"); done < <("${__GIT_STATUS_CMD}" 2>/dev/null)
@@ -88,6 +89,7 @@ function git_prompt() {
         NEW_PROMPT=${NEW_PROMPT//_PREHASH_/:}
         NEW_PROMPT=${NEW_PROMPT//_AHEAD_/↑}
         NEW_PROMPT=${NEW_PROMPT//_BEHIND_/↓}
+        NEW_PROMPT="${NEW_PROMPT} "
     else
         NEW_PROMPT="${EMPTY_PROMPT}"
     fi
@@ -95,4 +97,4 @@ function git_prompt() {
     echo "${NEW_PROMPT}"
 }
 
-PROMPT='$ret_status %{$fg[white]%}$(get_pwd) $(git_prompt)%{$reset_color%}%{$reset_color%} '
+PROMPT='$ret_status %{$fg[white]%}$(get_pwd) $(git_prompt)%{$reset_color%}%{$reset_color%}'
