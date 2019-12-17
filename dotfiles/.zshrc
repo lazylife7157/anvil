@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/lazylife/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -141,11 +141,7 @@ alias ll='ls -l'
 # Completions
 # ----------------------------------------------------------------------------
 
-if [ -d "${HOME}/.bash_completion.d" ]; then
-    for file in `ls ~/.bash_completion.d`; do
-        src "${HOME}/.bash_completion.d/${file}"
-    done
-fi
+fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 
 # NVM

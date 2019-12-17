@@ -46,13 +46,15 @@ done
 
 
 copy_dotfiles() {
-    for dotfile in `ls -A dotfiles | grep -v -e .bashrc.d -e .config -e Library`; do
+    for dotfile in `ls -A dotfiles | grep -v -e .bashrc.d -e .config -e Library -e .oh-my-zsh -e .zsh_functions`; do
         cp dotfiles/${dotfile} ${HOME}
     done
     cp -r dotfiles/.bashrc.d ${HOME}
 
     if [ `uname` == "Darwin" ]; then
         cp -r dotfiles/.config ${HOME}
+        cp -r dotfiles/.oh-my-zsh ${HOME}
+        cp -r dotfiles/.zsh_functions ${HOME}
         cp -r dotfiles/Library ${HOME}
 
         for plist in `ls -A dotfiles/Library/Preferences`; do
