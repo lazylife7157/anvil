@@ -23,17 +23,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Vue syntax highlight
 Plug 'posva/vim-vue'
 
-" Coc (Language Server Client) && Coc extensions
-Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-rls', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-python', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-vetur', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-html', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-css', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-json', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-yaml', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-emmet', { 'do': 'yarn install --frozen-lockfile' }
+" Coc (Language Server Client)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Markdown preview
 Plug 'shime/vim-livedown'
