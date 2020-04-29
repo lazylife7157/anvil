@@ -79,7 +79,7 @@ install_vim_plugins() {
     nvim \
         -c "CocInstall coc-rust-analyzer" \
         -c "CocInstall coc-python" \
-        -c "CocInstall coc-veture" \
+        -c "CocInstall coc-vetur" \
         -c "CocInstall coc-tsserver" \
         -c "CocInstall coc-html" \
         -c "CocInstall coc-css" \
