@@ -124,7 +124,7 @@ initialize_debian() {
 
 initialize_osx() {
     brew install git wget exa fd yarn neovim tig
-    brew cask install alacritty
+    brew cask install alacritty slate karabiner-elements
 
     install_rust
     install_python ${PYTHON_VERSION}
