@@ -75,7 +75,7 @@ initialize_arch() {
         rm -rf ${YAY_DIR}
     fi
 
-    pacman -Sy --needed --noconfirm tmux exa fd yarn neovim tig
+    pacman -Sy --needed --noconfirm zsh exa fd yarn neovim tig
 
     pacman -Sy --needed --noconfirm libglvnd xf86-video-nouveau mesa
     pacman -Sy --needed --noconfirm sway swayidle swaylock
@@ -99,12 +99,11 @@ initialize_debian() {
 
     ${sudo} apt update
     ${sudo} apt install -y \
+        zsh \
         cmake tar libevent-dev libncurses-dev \
         neovim tig
     ${sudo} apt install -y --no-install-recommends yarn
     ${sudo} apt autoremove -y
-
-    install_tmux ${TMUX_VERSION}
 
     install_rust
     install_node
@@ -113,7 +112,7 @@ initialize_debian() {
 }
 
 initialize_osx() {
-    brew install git tmux exa fd yarn neovim tig
+    brew install git exa fd yarn neovim tig
     brew cask install alacritty
 
     install_rust
@@ -132,7 +131,10 @@ initialize() {
         initialize_osx
     fi
 
-    git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+    install_tmux ${TMUX_VERSION}
+
+    chsh -s /bin/zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 install_anvil() {
