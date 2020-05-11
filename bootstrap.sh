@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 set -o errexit
 set -o pipefail
@@ -23,11 +23,16 @@ install_python() {
     VERSION=${1}
     if [ ! -d "${HOME}/.pyenv" ]; then
         curl https://pyenv.run | bash
+    fi
+
+    if [ ! -x "$(command -v pyenv)"]; then
         export PATH="${PATH}:${HOME}/.pyenv/bin"
         eval "$(pyenv init -)"
-        pyenv install ${VERSION}
-        pyenv global ${VERSION}
+        eval "$(pyenv virtualenv-init -)"
     fi
+
+    pyenv install ${VERSION}
+    pyenv global ${VERSION}
 }
 
 install_node() {
@@ -139,15 +144,10 @@ initialize() {
 
     install_tmux ${TMUX_VERSION}
 
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-}
-
-install_anvil() {
-    git clone https://github.com/lazylife7157/anvil ${HOME}/.anvil
+    if [ ! -d "${HOME}/.oh-my-zsh" ]; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
 }
 
 
 initialize
-install_anvil
-cd ${HOME}/.anvil
-bash forge --all
