@@ -9,7 +9,7 @@ set -o xtrace
 PYTHON_VERSION=3.8.2
 TMUX_VERSION=3.1b
 PLATFORM=`uname -s`
-[`whoami` != "root"] && sudo="sudo" || sudo=""
+[ `whoami` != "root" ] && sudo="sudo" || sudo=""
 
 
 install_rust() {
@@ -25,7 +25,6 @@ install_python() {
         curl https://pyenv.run | bash
         export PATH="${PATH}:${HOME}/.pyenv/bin"
         eval "$(pyenv init -)"
-        eval "$(pyenv virtualenv-init -)"
         pyenv install ${VERSION}
         pyenv global ${VERSION}
     fi
@@ -75,7 +74,10 @@ initialize_arch() {
         rm -rf ${YAY_DIR}
     fi
 
-    pacman -Sy --needed --noconfirm zsh exa fd yarn neovim tig
+    pacman -Sy --needed --noconfirm zsh
+    chsh -s /bin/zsh
+
+    pacman -Sy --needed --noconfirm exa fd yarn neovim tig
 
     pacman -Sy --needed --noconfirm libglvnd xf86-video-nouveau mesa
     pacman -Sy --needed --noconfirm sway swayidle swaylock
@@ -98,8 +100,10 @@ initialize_debian() {
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | ${sudo} tee /etc/apt/sources.list.d/yarn.list
 
     ${sudo} apt update
+    ${sudo} apt install -y zsh
+    chsh -s /bin/zsh
+
     ${sudo} apt install -y \
-        zsh \
         cmake tar libevent-dev libncurses-dev \
         neovim tig
     ${sudo} apt install -y --no-install-recommends yarn
@@ -112,7 +116,7 @@ initialize_debian() {
 }
 
 initialize_osx() {
-    brew install git exa fd yarn neovim tig
+    brew install git wget exa fd yarn neovim tig
     brew cask install alacritty
 
     install_rust
@@ -133,7 +137,6 @@ initialize() {
 
     install_tmux ${TMUX_VERSION}
 
-    chsh -s /bin/zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
