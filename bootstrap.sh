@@ -6,8 +6,8 @@ set -o nounset
 set -o xtrace
 
 
-PYTHON_VERSION=3.7.3
-TMUX_VERSION=2.9
+PYTHON_VERSION=3.8.2
+TMUX_VERSION=3.1b
 PLATFORM=`uname -s`
 [`whoami` != "root"] && sudo="sudo" || sudo=""
 
@@ -24,8 +24,8 @@ install_python() {
     if [ ! -d "${HOME}/.pyenv" ]; then
         curl https://pyenv.run | bash
         export PATH="${PATH}:${HOME}/.pyenv/bin"
-        pyenv init -
-        pyenv virtualenv-init -
+        eval "$(pyenv init -)"
+        eval "$(pyenv virtualenv-init -)"
         pyenv install ${VERSION}
         pyenv global ${VERSION}
     fi
