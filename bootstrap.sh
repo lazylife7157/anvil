@@ -41,20 +41,22 @@ install_node() {
 }
 
 install_tmux() {
-    VERSION=${1}
-    pushd .
-    cd ~
-    wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
-    tar xf tmux-${VERSION}.tar.gz
-    rm -f tmux-${VERSION}.tar.gz
-    cd tmux-${VERSION}
-    ./configure
-    make
-    ${sudo} make install
-    cd -
-    ${sudo} rm -rf /usr/local/src/tmux-\*
-    ${sudo} mv tmux-${VERSION} /usr/local/src
-    popd
+    if [ ! -x "$(command -v tmux)"]; then
+        VERSION=${1}
+        pushd .
+        cd ~
+        wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
+        tar xf tmux-${VERSION}.tar.gz
+        rm -f tmux-${VERSION}.tar.gz
+        cd tmux-${VERSION}
+        ./configure
+        make
+        ${sudo} make install
+        cd -
+        ${sudo} rm -rf /usr/local/src/tmux-\*
+        ${sudo} mv tmux-${VERSION} /usr/local/src
+        popd
+    fi
 }
 
 initialize_arch() {
