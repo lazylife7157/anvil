@@ -129,6 +129,8 @@ initialize_osx() {
     install_rust
     install_python ${PYTHON_VERSION}
     install_node
+
+    defaults write -globalDomain AppleInterfaceStyle Dark
 }
 
 initialize() {
