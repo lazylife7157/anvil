@@ -74,19 +74,6 @@ install_vim_plugins() {
         curl -fLo ${HOME}/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
     nvim -c PlugClean -c PlugInstall -c UpdateRemotePlugins -c qa!
-
-    # Coc extensions
-    nvim \
-        -c "CocInstall coc-rust-analyzer" \
-        -c "CocInstall coc-python" \
-        -c "CocInstall coc-vetur" \
-        -c "CocInstall coc-tsserver" \
-        -c "CocInstall coc-html" \
-        -c "CocInstall coc-css" \
-        -c "CocInstall coc-json" \
-        -c "CocInstall coc-yaml" \
-        -c "CocInstall coc-emmet" \
-        -c qa!
 }
 
 

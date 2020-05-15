@@ -133,6 +133,18 @@ autocmd FileType vue syntax sync fromstart
 " }}}
 " COC {{{
 
+let g:coc_global_extensions = [
+    \ 'coc-rust-analyzer',
+    \ 'coc-python',
+    \ 'coc-vetur',
+    \ 'coc-tsserver',
+    \ 'coc-html',
+    \ 'coc-css',
+    \ 'coc-json',
+    \ 'coc-yaml',
+    \ 'coc-emmet',
+    \ ]
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 
