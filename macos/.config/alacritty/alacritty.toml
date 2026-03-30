@@ -1,0 +1,39 @@
+[font]
+normal = { family = "D2Coding" }
+size = 16.0
+
+[window]
+padding = { x = 2, y = 2 }
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+background = "#282c34"
+foreground = "#abb2bf"
+
+[colors.normal]
+black   = "#131613"
+red     = "#e06c75"
+green   = "#98c379"
+yellow  = "#d19a66"
+blue    = "#61afef"
+magenta = "#c678dd"
+cyan    = "#56b6c2"
+white   = "#abb2bf"
+
+[colors.bright]
+black   = "#5c6370"
+red     = "#e06c75"
+green   = "#98c379"
+yellow  = "#d19a66"
+blue    = "#61afef"
+magenta = "#c678dd"
+cyan    = "#56b6c2"
+white   = "#ffffff"
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+
+[terminal]
+shell = { program = "/bin/zsh", args = ["-l"] }

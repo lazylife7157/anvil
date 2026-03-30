@@ -1,81 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -o errexit
-set -o pipefail
-set -o nounset
-set -o xtrace
+DIR="$(cd "$(dirname "$0")" && pwd)"
 
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    brew bundle --file="$DIR/Brewfile"
+    stow -d "$DIR" -t "$HOME" macos
+fi
 
-PLATFORM=`uname -s`
-
-DOTFILES=0
-VIMPLUGINS=0
-
-help() {
-    cat << EOF
-usage: ${0} [OPTIONS]
-
-    --help          Show this message
-    --all           Do every tasks
-
-    --dotfiles      Copy dotfiles into home directory
-    --vimplugins    Install vim plugins via vim-plug
-EOF
-}
-
-for opt in "${@}"; do
-    case ${opt} in
-        --help)
-            help
-            exit 0
-            ;;
-        --all)
-            DOTFILES=1
-            VIMPLUGINS=1
-            ;;
-        -d)             DOTFILES=1  ;;
-        --dotfiles)     DOTFILES=1  ;;
-        -v)             VIMPLUGINS=1;;
-        --vimplugins)   VIMPLUGINS=1;;
-        *)
-            help
-            exit 1
-            ;;
-    esac
-done
-
-
-copy_dotfiles() {
-    for dotfile in `ls -A dotfiles | grep -v -e .bashrc.d -e .config -e Library -e .oh-my-zsh -e .zsh_functions`; do
-        cp dotfiles/${dotfile} ${HOME}
-    done
-    cp -r dotfiles/.bashrc.d ${HOME}
-
-    if [ `uname` == "Darwin" ]; then
-        cp -r dotfiles/.config ${HOME}
-        cp -r dotfiles/.oh-my-zsh ${HOME}
-        cp -r dotfiles/.zsh_functions ${HOME}
-        cp -r dotfiles/Library ${HOME}
-
-        for plist in `ls -A dotfiles/Library/Preferences`; do
-            defaults import ${plist} dotfiles/Library/Preferences/${plist}
-        done
-    else
-        mkdir -p ~/.config
-        for dir in `ls -A dotfiles/.config | grep -v karabiner`; do
-            cp -r dotfiles/.config/${dir} ${HOME}/.config
-        done
-    fi
-}
-
-install_vim_plugins() {
-    [ ! -x "$(command -v pyls)" ] && pip install python-language-server
-    if [ ! -f "${HOME}/.config/nvim/autoload/plug.vim" ]; then
-        curl -fLo ${HOME}/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    fi
-    nvim -c PlugClean -c PlugInstall -c UpdateRemotePlugins -c qa!
-}
-
-
-[ "${DOTFILES}" -eq 1 ] && copy_dotfiles
-[ "${VIMPLUGINS}" -eq 1 ] && install_vim_plugins
+stow -d "$DIR" -t "$HOME" dotfiles
