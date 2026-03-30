@@ -37,3 +37,8 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [terminal]
 shell = { program = "/bin/zsh", args = ["-l"] }
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
